@@ -1,5 +1,21 @@
-{% extend "base.html"}
+{% extends "base.html" %}
 {% block content %}
     <h1>About page</h1>
     <p>this is a template</p>
+    {{ my_html|striptags|slugify }}
+    <h3>{{  title|title}}</h3>
+    <p>My number is: {{ my_number }}</p>
+    <p>Does this context exist? T/F: {{ is_real }}</p>
+    <h2>using template tags to display a list with a for loop:</h2>
+    <ul>
+        {% for item in my_list %}
+            {% if item == 3 %}
+                <li>{{forloop.counter}} - {{ item|add:3}}</li>
+            {% elif item == "yes" %}
+                <li>This is not the network</li>
+            {% else %}
+                <li>{{ forloop.counter }} - {{ item }}</li>
+            {% endif %}
+        {% endfor%}
+    </ul>
 {% endblock %}
