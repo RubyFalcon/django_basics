@@ -27,7 +27,7 @@ urlpatterns = [
     path("about/",about_view,name="about"),
     path('admin/', admin.site.urls),
     path("product/", product_detail_view),
-    path("products/<int:id>/",dynamic_lookup_view, name="product"),
+    path("products/<int:id>/",dynamic_lookup_view, name="product-detail"),
     path("create/", product_create_view),
     path("initial/",render_initial_data),
     path("products/<int:id>/delete/", product_delete_view ,name="product-delete"),
