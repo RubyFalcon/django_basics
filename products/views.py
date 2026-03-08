@@ -5,7 +5,6 @@ from .models import Product
 
 # Create your views here.
 
-
 def product_create_view(request):
     form = ProductForm(request.POST or None)
     if form.is_valid():
@@ -19,9 +18,16 @@ def product_create_view(request):
 
     return render(request,"products/product_create.html", context)
 
-def product_update_view(request):
- 
-    obj = Product.objects.get(id=1)
+def product_detail_view(request,id):
+    obj = get_object_or_404(Product, id=id)
+   
+    context = {
+        'object': obj
+    }
+    return render(request,"products/product_detail.html", context)
+
+def product_update_view(request,id):
+    obj = get_object_or_404(Product, id=id)
     form = ProductForm(request.POST or None,instance=obj)  
     if form.is_valid():
         form.save()
@@ -30,21 +36,6 @@ def product_update_view(request):
         "form": form,
     }
     return render(request,"products/product_create.html", context)
-def product_detail_view(request):
-    obj = Product.objects.get(id=1)
-   
-    context = {
-        'object': obj
-    }
-    return render(request,"products/product_detail.html", context)
-
-
-def dynamic_lookup_view(request, id):
-    obj = get_object_or_404(Product, id=id)
-    context = {
-        'object': obj
-    }
-    return render(request,"products/product_detail.html",context)
 
 def product_delete_view(request,id):
     obj = get_object_or_404(Product, id=id)

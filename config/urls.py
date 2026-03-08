@@ -23,7 +23,7 @@ from products.views import (
     product_detail_view, 
     product_create_view, 
     product_update_view,
-    dynamic_lookup_view, 
+ 
     product_delete_view, 
     product_list_view)
 
@@ -33,10 +33,9 @@ urlpatterns = [
     path("contact/",contact_view,name="contact"),
     path("about/",about_view,name="about"),
     path('admin/', admin.site.urls),
-    path("product/", product_detail_view),
-    path("products/<int:id>/",dynamic_lookup_view, name="product-detail"),
+    path("products/<int:id>/",product_detail_view, name="product-detail"),
     path("create/", product_create_view),
-    path("initial/",product_update_view),
+    path("products/<int:id>/update/",product_update_view,name="product-update"),
     path("products/<int:id>/delete/", product_delete_view ,name="product-delete"),
     path("products/",product_list_view, name="product-list")
 ]
