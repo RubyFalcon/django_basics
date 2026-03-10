@@ -3,8 +3,8 @@
 {% block content %}
 <h1>{{ object.title }}</h1>
 <p>{% if object.body != None and body != "" %}{{ object.body}}{% else %} Blog coming soon {% endif %}</p>
-<p>£{{ object.author}}</p>
-<p>{% if object.is_pubished %} Published {% else%} Not Published</p>
+<p>{{ object.author}}</p>
+<p>{% if object.is_pubished %} Published {% else%} Not Published {% endif %}</p>
 
 
 {% endblock %}
