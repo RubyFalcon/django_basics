@@ -7,8 +7,18 @@ from django.views.generic import (
     DeleteView
 )
 
+from .forms import ArticleForm
 from .models import Article
+
 # Create your views here.
+
+class ArticleCreateView(CreateView):
+    template_name = "articles/article_create.html"
+    form_class = ArticleForm
+    queryset = Article.objects.all()
+
+
+
 class ArticleListView(ListView):
     template_name = "articles/article_list.html"
     queryset = Article.objects.all()
