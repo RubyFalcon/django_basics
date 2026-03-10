@@ -38,6 +38,16 @@ class ArticleUpdateView(UpdateView):
         return super().form_valid(form)
 
 
+class ArticleDeleteView(DeleteView):
+    template_name = "articles/article_delete.html"
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Article, id = id_)
+    
+    def get_success_url(self):
+        return "../../"
+
 class ArticleListView(ListView):
     template_name = "articles/article_list.html"
     queryset = Article.objects.all()
