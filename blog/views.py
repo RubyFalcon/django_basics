@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -46,7 +47,7 @@ class ArticleDeleteView(DeleteView):
         return get_object_or_404(Article, id = id_)
     
     def get_success_url(self):
-        return "../../"
+        return reverse("articles:article-list")
 
 class ArticleListView(ListView):
     template_name = "articles/article_list.html"
