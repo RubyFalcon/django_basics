@@ -18,8 +18,10 @@ class CourseCreateView(View):
         form = CourseModelForm(request.POST)
         if form.is_valid():
             form.save()
+            form = CourseModelForm()
         context = {"form": form}
         return render(request, self.template_name, context)
+    
     
 class CourseListView(View):
     template_name = "courses/course_list.html"
