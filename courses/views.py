@@ -22,7 +22,40 @@ class CourseCreateView(View):
         context = {"form": form}
         return render(request, self.template_name, context)
     
+class CourseUpdateView(View):
+    template_name = "courses/course_update.html"
+    def get_object(self):
+        id = self.kwargs.get('id')
+        obj = None
+        if id is not None: 
+           form = CourseModelForm()
+           obj = get_object_or_404(Course, id=id)
+        #    context["object"] = obj
     
+        return obj
+    def get(self,request, *args, **kwargs):
+        # GET method
+        context  = {}
+        obj = self.get_object()
+        if obj is not None:
+            form = CourseModelForm(instance=obj)
+            context["object"] = obj
+            context["form"] = form
+        return render(request, self.template_name, context)
+    
+    def post(self,request, *args, **kwargs):
+        # POST method
+        context  = {}
+        obj = self.get_object()
+        if obj is not None:
+            form = CourseModelForm(request.POST, instance=obj)
+            if form.is_valid():
+                form.save()
+
+            context["object"] = obj
+            context["form"] = form
+        return render(request, self.template_name, context)
+      
 class CourseListView(View):
     template_name = "courses/course_list.html"
     queryset = Course.objects.all()
